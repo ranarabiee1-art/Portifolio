@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="project_details.css">
+    <style>
+       
+        :root {
+            --primary-color: #ED775A;
+            --secondary-color: #0F0E0E;
+            --accent-color: #CCE0AC;
+            --light-color: #ED775A;
+            --dark-text: #F7F7F7;
+            --white-color: #ffffff;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--dark-text);
+            line-height: 1.6;
+            text-align: left;
+            direction: ltr;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+        nav a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+            margin: 0 1rem;
+        }
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        .project-details {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .project-details h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .project-details p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: calc(33.33% - 1rem);
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .tools-section {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .tools-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        .tools-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            list-style-type: none;
+            padding: 0;
+        }
+        .tool-item {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            position: relative;
+            cursor: help;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .tool-item:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            width: 250px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: normal;
+            font-weight: normal;
+            line-height: 1.4;
+        }
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--primary-color) transparent transparent transparent;
+        }
+        .tool-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .github-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: fit-content;
+            margin: 2rem auto 0;
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 0.75rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #ED775A;
+        }
+        .back-to-home {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 0.75rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .back-to-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #e57a7a;
+        }
+        body {
+            padding-top: 6rem;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .nav-links a {
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="main.html">← Portfolio</a>
+            <div class="nav-links">
+                <a href="#about-project">About Project</a>
+                <a href="#project-gallery">Gallery</a>
+                <a href="#video-section">Video</a>
+                <a href="#tools-section">Tools</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="project-details">
+            <h1 id="project-title"></h1>
+
+            <img class="main-image" id="main-image" src="" alt="Main project image">
+
+            <section id="about-project">
+                <h2 style="font-size: 2rem; color: var(--primary-color); text-align: center; margin-bottom: 1rem;">About This Project</h2>
+                <p id="project-description-1"></p>
+                <p id="project-description-2"></p>
+            </section>
+
+            <section id="project-gallery">
+                <h2 style="font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 2rem; margin-bottom: 1.5rem;">Project Gallery</h2>
+                <div class="gallery" id="project-gallery-container">
+                </div>
+            </section>
+            
+            <section id="video-section">
+                <h2 style="font-size: 2rem; color: var(--primary-color); text-align: center; margin-top: 2rem; margin-bottom: 1.5rem;">Project Overview Video</h2>
+                <div class="video-container">
+                    <video controls src="your-video-file-name.mp4" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);"></video>
+                </div>
+            </section>
+
+            <div class="tools-section" id="tools-section">
+                <h2>Tools and Technologies</h2>
+                <ul class="tools-list" id="tools-list">
+                </ul>
+            </div>
+
+            <a href="#" target="_blank" class="github-btn" id="github-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: var(--dark-text);">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.493.998.108-.778.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.601.797.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const projects = {
+            customer: {
+                title: "Customer analysis",
+                description1: "This project focused on analyzing hotel customer data to uncover insights into guest demographics, satisfaction levels, and service quality. Using structured datasets containing guest records, feedback, and evaluations, I performed data cleaning, transformation, and visualization to build a comprehensive analysis and interactive dashboard.",
+                description2: "Customer Demographics: Segmented customers by gender, age, and purpose of visit (business vs. vacation).Satisfaction Ratings: Evaluated guest experience across multiple service areas including staff attitude, check-in process, room service, cleanliness, food quality, and amenities.Net Promoter Score (NPS): Classified guests into promoters, passives, and detractors, and tracked NPS trends over time.",
+                mainImage: "picture/data analysis 1.png",
+                galleryImages: [
+                    "picture/data analysis 1.png",
+                    "picture/customer analysis.png",
+                    "picture/customer analysis 1.png"
+                ],
+                tools: [
+                    { name: "Excell", tooltip: "A powerful software used for data analysis, processing." },
+                    { name: "Pivot Tables & Pivot Charts", tooltip: "For summarizing and visualizing customer insights." },
+                    { name: "Dashboards", tooltip: "using slicers, timelines, and linked charts." },
+                    { name: "Power Query", tooltip: "For data cleaning and transformation." }
+                ],
+                githubLink: "https://github.com/ranarabiee1-art/customer-project.git",
+                videoPath: ""
+            },
+            sales: {
+                title: "sales analysis",
+                description1: "this project is asales analysis i use excell and power query editot in cleaning data and analysis : total sales, revenue, profit, units sold.Conduct trend analysis: monthly/quarterly/yearly sales performance.Customer segmentation (top customers, customer retention, repeat purchases).",
+                description2: "Product performance (best-selling items, low-performing items).Regional/market analysis.Include filters and slicers for drill-down insights (by time, region, product, sales rep, etc.).Visualize KPIs with charts, graphs, and maps for easy interpretation.",
+                mainImage: "picture/sales performance.png",
+                galleryImages: [
+                    "https://placehold.co/300x200/F0EAAC/333333?text=Customer+Segment+Chart",
+                    "https://placehold.co/300x200/F0EAAC/333333?text=RFM+Analysis+Chart",
+                    "https://placehold.co/300x200/F0EAAC/333333?text=Customer+Journey+Map"
+                ],
+                tools: [
+                    { name: "Excell", tooltip: "A powerful software used for data analysis, processing." },
+                    { name: "Pivot Tables & Pivot Charts", tooltip: "For summarizing and visualizing customer insights." },
+                    { name: "Dashboards", tooltip: "using slicers, timelines, and linked charts." },
+                    { name: "Power Query", tooltip: "For data cleaning and transformation." }
+                ],
+                githubLink: "https://github.com/ranarabiee1-art/sales-project.git",
+                videoPath: "Projects/Customer Project/customer_video.mp4"
+            },
+            pharmacovigillance: {
+                title: "Pharmacovigillance analysis",
+                description1: "This was a research project focused on developing a predictive model for epidemic spread using public health data. The model aims to help relevant authorities in effective planning and response to potential outbreaks. I used R for initial data analysis and a deep learning framework in Python for building the predictive model.",
+                description2: "The model was trained on historical data of disease cases and environmental factors. Key findings include a prediction accuracy of 85% for case spikes in the following week and the identification of high-risk areas based on population density and weather patterns.",
+                mainImage: "https://placehold.co/900x500/FF8A8A/333333?text=Epidemic+Dashboard",
+                galleryImages: [
+                    "https://placehold.co/300x200/F0EAAC/333333?text=Prediction+Model+Graph",
+                    "https://placehold.co/300x200/F0EAAC/333333?text=Geographic+Spread+Map",
+                    "https://placehold.co/300x200/F0EAAC/333333?text=Infection+Rate+Chart"
+                ],
+                tools: [
+                    { name: "R", tooltip: "A programming language and software environment for statistical computing and graphics." },
+                    { name: "Python", tooltip: "A powerful programming language used for data analysis, processing, and building statistical models." },
+                    { name: "TensorFlow", tooltip: "A free and open-source software library for machine learning." },
+                    { name: "Power BI", tooltip: "A business analytics service from Microsoft for interactive data visualization and analysis." }
+                ],
+                githubLink: "https://github.com/yourprofile/epidemic-spread-prediction-repo",
+                videoPath: "Projects/Epidemic Project/epidemic_video.mp4"
+            },
+        };
+
+        function getProjectNameFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('project');
+        }
+
+        function displayProjectDetails() {
+            const projectName = getProjectNameFromUrl();
+            const project = projects[projectName];
+
+            if (project) {
+                document.title = project.title + " | Project Details";
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('main-image').src = project.mainImage;
+                document.getElementById('main-image').alt = project.title + " image";
+                document.getElementById('project-description-1').textContent = project.description1;
+                document.getElementById('project-description-2').textContent = project.description2;
+
+                const galleryContainer = document.getElementById('project-gallery-container');
+                galleryContainer.innerHTML = '';
+                project.galleryImages.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = "Secondary project image";
+                    galleryContainer.appendChild(img);
+                });
+
+                const toolsList = document.getElementById('tools-list');
+                toolsList.innerHTML = '';
+                project.tools.forEach(tool => {
+                    const li = document.createElement('li');
+                    li.classList.add('tool-item');
+                    li.textContent = tool.name;
+                    const tooltipSpan = document.createElement('span');
+                    tooltipSpan.classList.add('tooltip');
+                    tooltipSpan.textContent = tool.tooltip;
+                    li.appendChild(tooltipSpan);
+                    toolsList.appendChild(li);
+                });
+
+                document.getElementById('github-link').href = project.githubLink;
+
+                
+                const videoSection = document.getElementById('video-section');
+                const videoElement = videoSection.querySelector('video');
+                if (videoElement && project.videoPath) {
+                    videoElement.src = project.videoPath;
+                } else if (!project.videoPath) {
+                    
+                    videoSection.style.display = 'none';
+                }
+
+            } else {
+                document.getElementById('project-title').textContent = "Project Not Found";
+                document.getElementById('main-image').style.display = 'none';
+                document.getElementById('project-description-1').textContent = "Please go back to the homepage and select a valid project.";
+                document.getElementById('project-description-2').style.display = 'none';
+                document.getElementById('project-gallery-container').style.display = 'none';
+                document.getElementById('tools-section').style.display = 'none';
+                document.getElementById('github-link').style.display = 'none';
+                document.getElementById('video-section').style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', displayProjectDetails);
+    </script>
+</body>
+</html>
